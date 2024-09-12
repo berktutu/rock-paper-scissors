@@ -46,10 +46,9 @@ const getComputerChoice = function () {
   return computerChoice;
 };
 
-// Game Logic
+// Game Logic //
 let humanScore = 0;
 let computerScore = 0;
-
 // Getting the values of the function
 const humanSelection = getHumanChoice();
 const computerSelection = getComputerChoice();
@@ -61,7 +60,8 @@ const outcomes = {
   Scissors: { Rock: "Lose", Paper: "Win", Scissors: "Draw" },
 };
 function getOutcome(humanOutcome, computerOutcome) {
-  return outcomes[humanOutcome][computerOutcome];
+  const outcome = outcomes[humanOutcome][computerOutcome];
+  return outcome;
 }
 
 // Function for console message depending on the outcome
@@ -78,9 +78,23 @@ function getMessage(humanOutput, computerOutput) {
   }
 }
 
+// Selecting the outcome
+const outcomeSelection = getOutcome(humanSelection, computerSelection);
+
 // Round function calling the getMessage function to declare who wins
 const playRound = function (humanChoice, computerChoice) {
+  // Getting the message of each choice to the console
   console.log(getMessage(humanChoice, computerChoice));
+
+  // Logging the scores into the console
+  if (outcomeSelection === "Win") {
+    humanScore++;
+  } else {
+    computerScore++;
+  }
+
+  console.log(`Your score: ${humanScore}`);
+  console.log(`Computer's score: ${computerScore}`);
 };
 
 playRound(humanSelection, computerSelection);
