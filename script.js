@@ -1,5 +1,3 @@
-console.log("Hello World!");
-
 // Create a function for the math.random logic
 // Logic of computer's choice Rock, Paper, Scissors
 // It should be a function so it returns one of the above.
@@ -81,20 +79,24 @@ function getMessage(humanOutput, computerOutput) {
 // Selecting the outcome
 const outcomeSelection = getOutcome(humanSelection, computerSelection);
 
-// Round function calling the getMessage function to declare who wins
-const playRound = function (humanChoice, computerChoice) {
-  // Getting the message of each choice to the console
-  console.log(getMessage(humanChoice, computerChoice));
+// Function to play the entire game. The game should have 5 rounds
+const playGame = function () {
+  // Round function calling the getMessage function to declare who wins
+  function playRound(humanChoice, computerChoice) {
+    // Getting the message of each choice to the console
+    console.log(getMessage(humanChoice, computerChoice));
 
-  // Logging the scores into the console
-  if (outcomeSelection === "Win") {
-    humanScore++;
-  } else {
-    computerScore++;
+    // Logging the scores into the console
+    if (outcomeSelection === "Win") {
+      humanScore++;
+    } else if (outcomeSelection === "Lose") {
+      computerScore++;
+    }
+
+    console.log(`Your score: ${humanScore}`);
+    console.log(`Computer's score: ${computerScore}`);
   }
-
-  console.log(`Your score: ${humanScore}`);
-  console.log(`Computer's score: ${computerScore}`);
+  playRound(humanSelection, computerSelection);
 };
 
-playRound(humanSelection, computerSelection);
+playGame();
