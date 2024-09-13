@@ -1,12 +1,9 @@
 // Create a function for the math.random logic
 // Logic of computer's choice Rock, Paper, Scissors
-// It should be a function so it returns one of the above.
 // Create a prompt for user's pick
-// Declare scores
+// Declare scores and a winner.
 
-// Computer Choice and Human Choice Logic //
-
-// Fixing user input (whitespace, uppercase and lowercase)
+// Fixing user input (whitespace, uppercase, and lowercase)
 const fixInput = function (str) {
   let trimmedStr = str.trim();
   if (typeof trimmedStr !== "string" || trimmedStr.length === 0)
@@ -14,13 +11,24 @@ const fixInput = function (str) {
   return trimmedStr[0].toUpperCase() + trimmedStr.slice(1).toLowerCase();
 };
 
+// Checking if the input is valid
+const isValid = function (choice) {
+  const validChoices = ["Rock", "Paper", "Scissors"];
+  return validChoices.includes(choice);
+};
+
 const getHumanChoice = function () {
-  const humanInput = prompt(
-    "Enter your choice: Rock, Paper, or Scissors (The input is not case sensetive)"
-  );
-  const fixedHumanInput = fixInput(humanInput);
-  const inputLog = "Your choice:" + " " + fixedHumanInput;
-  console.log(inputLog);
+  let humanInput;
+  let fixedHumanInput;
+
+  // Added not to break the game if the input is wrong
+  do {
+    humanInput = prompt(
+      "Enter your choice: Rock, Paper, or Scissors (The input is not case sensitive)"
+    );
+    fixedHumanInput = fixInput(humanInput);
+  } while (!isValid(fixedHumanInput));
+
   return fixedHumanInput;
 };
 
@@ -36,36 +44,27 @@ const choices = {
   2: "Paper",
   3: "Scissors",
 };
+
 const getComputerChoice = function () {
   const propertyValue = generateNumber(1, 3);
   const computerChoice = choices[propertyValue];
-  // Getting the choice according to property name.
-  console.log(`Computer's choice: ${computerChoice}`);
   return computerChoice;
 };
 
-// Game Logic //
-let humanScore = 0;
-let computerScore = 0;
-// Getting the values of the function
-const humanSelection = getHumanChoice();
-const computerSelection = getComputerChoice();
-
-// Getting the outcome with possibilites of win, lose and draw
+// Getting the outcome with possibilities of win, lose, and draw
 const outcomes = {
   Rock: { Paper: "Lose", Scissors: "Win", Rock: "Draw" },
   Paper: { Rock: "Win", Scissors: "Lose", Paper: "Draw" },
   Scissors: { Rock: "Lose", Paper: "Win", Scissors: "Draw" },
 };
+
 function getOutcome(humanOutcome, computerOutcome) {
-  const outcome = outcomes[humanOutcome][computerOutcome];
-  return outcome;
+  return outcomes[humanOutcome][computerOutcome];
 }
 
 // Function for console message depending on the outcome
 function getMessage(humanOutput, computerOutput) {
   const outcome = getOutcome(humanOutput, computerOutput);
-
   if (outcome === "Lose") {
     return `You ${outcome}! ${computerOutput} beats ${humanOutput}`;
   }
@@ -76,15 +75,29 @@ function getMessage(humanOutput, computerOutput) {
   }
 }
 
-// Selecting the outcome
-const outcomeSelection = getOutcome(humanSelection, computerSelection);
-
-// Function to play the entire game. The game should have 5 rounds
+// Function to play the entire game for 5 rounds
 const playGame = function () {
-  // Round function calling the getMessage function to declare who wins
-  function playRound(humanChoice, computerChoice) {
+  let humanScore = 0;
+  let computerScore = 0;
+
+  alert(
+    `Game is starting. You will play 5 rounds. Whoever has the most points wins.`
+  );
+
+  for (let i = 0; i < 5; i++) {
+    console.log(`Round ${i + 1} 🥷`);
+    const humanChoice = getHumanChoice(); // Get human choice
+    const computerChoice = getComputerChoice(); // Get computer choice
+
     // Getting the message of each choice to the console
-    console.log(getMessage(humanChoice, computerChoice));
+    // This might also get activated if I want to see who played what in details//
+    // console.log(`You play: ${humanChoice}`);
+    // console.log(`Computer plays: ${computerChoice}`);
+    const message = getMessage(humanChoice, computerChoice);
+    console.log(message);
+
+    // Selecting the outcome
+    const outcomeSelection = getOutcome(humanChoice, computerChoice);
 
     // Logging the scores into the console
     if (outcomeSelection === "Win") {
@@ -96,7 +109,14 @@ const playGame = function () {
     console.log(`Your score: ${humanScore}`);
     console.log(`Computer's score: ${computerScore}`);
   }
-  playRound(humanSelection, computerSelection);
+
+  if (humanScore > computerScore) {
+    console.log(`You won! 🏆`);
+  } else if (computerScore > humanScore) {
+    console.log(`You lost. 😔`);
+  } else {
+    console.log(`It's a draw. 🤝`);
+  }
 };
 
 playGame();
