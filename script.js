@@ -80,10 +80,6 @@ const playGame = function () {
   let humanScore = 0;
   let computerScore = 0;
 
-  alert(
-    `Game is starting. You will play 5 rounds. Whoever has the most points wins.`
-  );
-
   for (let i = 0; i < 5; i++) {
     console.log(`Round ${i + 1} 🥷`);
     const humanChoice = getHumanChoice(); // Get human choice
@@ -106,8 +102,9 @@ const playGame = function () {
       computerScore++;
     }
 
-    console.log(`Your score: ${humanScore}`);
-    console.log(`Computer's score: ${computerScore}`);
+    console.log(
+      `Your score: ${humanScore}, Computer's score: ${computerScore}`
+    );
   }
 
   if (humanScore > computerScore) {
@@ -119,4 +116,13 @@ const playGame = function () {
   }
 };
 
-playGame();
+function startGame() {
+  alert(
+    "Please open the console to view the game results. You have 10 seconds to do so."
+  );
+  setTimeout(() => {
+    playGame();
+  }, 10000);
+}
+
+startGame();
