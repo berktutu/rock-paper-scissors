@@ -79,8 +79,9 @@ function getMessage(humanOutput, computerOutput) {
 const playGame = function () {
   let humanScore = 0;
   let computerScore = 0;
+  const rounds = 5;
 
-  for (let i = 0; i < 5; i++) {
+  for (let i = 0; i < rounds; i++) {
     console.log(`Round ${i + 1} 🥷`);
     const humanChoice = getHumanChoice(); // Get human choice
     const computerChoice = getComputerChoice(); // Get computer choice
@@ -116,13 +117,16 @@ const playGame = function () {
   }
 };
 
+const waitTime = 10000;
 function startGame() {
   alert(
-    "Please open the console to view the game results. You have 10 seconds to do so."
+    `Please open the console to view the game results. You have ${
+      waitTime - 1000
+    } seconds to do so.`
   );
   setTimeout(() => {
     playGame();
-  }, 10000);
+  }, waitTime);
 }
 
 startGame();
