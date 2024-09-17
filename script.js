@@ -65,10 +65,6 @@ const playGame = function (humanChoice) {
 
   const computerChoice = getComputerChoice(); // Get computer choice
 
-  // Getting the message of each choice to the console
-  // This might also get activated if I want to see who played what in details//
-  // console.log(`You play: ${humanChoice}`);
-  // console.log(`Computer plays: ${computerChoice}`);
   const message = getMessage(humanChoice, computerChoice);
 
   // Selecting the outcome
