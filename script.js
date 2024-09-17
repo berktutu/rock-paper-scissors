@@ -1,36 +1,9 @@
-// Create a function for the math.random logic
-// Logic of computer's choice Rock, Paper, Scissors
-// Create a prompt for user's pick
-// Declare scores and a winner.
-
-// Fixing user input (whitespace, uppercase, and lowercase)
-const fixInput = function (str) {
-  let trimmedStr = str.trim();
-  if (typeof trimmedStr !== "string" || trimmedStr.length === 0)
-    return "Wrong input";
-  return trimmedStr[0].toUpperCase() + trimmedStr.slice(1).toLowerCase();
-};
-
-// Checking if the input is valid
-const isValid = function (choice) {
-  const validChoices = ["Rock", "Paper", "Scissors"];
-  return validChoices.includes(choice);
-};
-
-const getHumanChoice = function () {
-  let humanInput;
-  let fixedHumanInput;
-
-  // Added not to break the game if the input is wrong
-  do {
-    humanInput = prompt(
-      "Enter your choice: Rock, Paper, or Scissors (The input is not case sensitive)"
-    );
-    fixedHumanInput = fixInput(humanInput);
-  } while (!isValid(fixedHumanInput));
-
-  return fixedHumanInput;
-};
+const btn = document.querySelectorAll(".btn");
+const scorePlayer = document.querySelector(".player-score");
+const scoreComputer = document.querySelector(".computer-score");
+const btnPlayAgain = document.querySelector(".btn-play-again");
+const gameMessage = document.querySelector(".game-message");
+const gameInfo = document.querySelector(".game-info");
 
 // Generating number between 1-3 for computer choice
 const generateNumber = function (min, max) {
@@ -75,58 +48,76 @@ function getMessage(humanOutput, computerOutput) {
   }
 }
 
+const resetGame = function () {
+  humanScore = 0;
+  computerScore = 0;
+};
+
+let humanScore = 0;
+let computerScore = 0;
+const winScore = 5;
+
 // Function to play the entire game for 5 rounds
-const playGame = function () {
-  let humanScore = 0;
-  let computerScore = 0;
-  const rounds = 5;
-
-  for (let i = 0; i < rounds; i++) {
-    console.log(`Round ${i + 1} 🥷`);
-    const humanChoice = getHumanChoice(); // Get human choice
-    const computerChoice = getComputerChoice(); // Get computer choice
-
-    // Getting the message of each choice to the console
-    // This might also get activated if I want to see who played what in details//
-    // console.log(`You play: ${humanChoice}`);
-    // console.log(`Computer plays: ${computerChoice}`);
-    const message = getMessage(humanChoice, computerChoice);
-    console.log(message);
-
-    // Selecting the outcome
-    const outcomeSelection = getOutcome(humanChoice, computerChoice);
-
-    // Logging the scores into the console
-    if (outcomeSelection === "Win") {
-      humanScore++;
-    } else if (outcomeSelection === "Lose") {
-      computerScore++;
-    }
-
-    console.log(
-      `Your score: ${humanScore}, Computer's score: ${computerScore}`
-    );
+const playGame = function (humanChoice) {
+  if (humanScore >= winScore || computerScore >= winScore) {
+    return;
   }
 
-  if (humanScore > computerScore) {
-    console.log(`You won! 🏆`);
-  } else if (computerScore > humanScore) {
-    console.log(`You lost. 😔`);
+  const computerChoice = getComputerChoice(); // Get computer choice
+
+  // Getting the message of each choice to the console
+  // This might also get activated if I want to see who played what in details//
+  // console.log(`You play: ${humanChoice}`);
+  // console.log(`Computer plays: ${computerChoice}`);
+  const message = getMessage(humanChoice, computerChoice);
+
+  // Selecting the outcome
+  const outcomeSelection = getOutcome(humanChoice, computerChoice);
+
+  // Logging the scores into the console
+  if (outcomeSelection === "Win") {
+    humanScore++;
+  } else if (outcomeSelection === "Lose") {
+    computerScore++;
+  }
+
+  // Render the scores in UI
+  if (outcomeSelection === "Win") {
+    gameMessage.style.color = "green";
+    scorePlayer.textContent = humanScore;
+  } else if (outcomeSelection === "Lose") {
+    gameMessage.style.color = "red";
+    scoreComputer.textContent = computerScore;
   } else {
-    console.log(`It's a draw. 🤝`);
+    gameMessage.style.color = "black";
+  }
+
+  // Render the message in UI
+  gameMessage.textContent = message;
+  gameInfo.style.display = "block";
+
+  if (humanScore >= winScore || computerScore >= winScore) {
+    if (humanScore > computerScore) {
+      gameMessage.textContent = "You won! 🏆";
+      return;
+    } else {
+      gameMessage.textContent = "You lost. 😔";
+      return;
+    }
   }
 };
 
-const waitTime = 10000;
-function startGame() {
-  alert(
-    `Please open the console to view the game results. You have ${
-      waitTime - 1000
-    } seconds to do so.`
-  );
-  setTimeout(() => {
-    playGame();
-  }, waitTime);
-}
+btn.forEach((button) =>
+  button.addEventListener("click", function () {
+    const humanChoice = button.textContent; // Get the text content of the clicked button (human choice)
+    playGame(humanChoice); // Start the game with the human choice
+  })
+);
 
-startGame();
+btnPlayAgain.addEventListener("click", function () {
+  gameMessage.textContent = "";
+  // Resetting the text content of scores
+  scorePlayer.textContent = "0";
+  scoreComputer.textContent = "0";
+  resetGame();
+});

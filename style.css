@@ -1,0 +1,79 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  color: #343a40;
+}
+
+.game-title {
+  text-align: center;
+  margin-top: 36px;
+}
+
+.main-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin-top: 48px;
+}
+
+.score-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+}
+
+.score-title {
+  font-size: 24px;
+}
+
+.score {
+  font-size: 24px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 36px;
+  margin-top: 48px;
+}
+
+.btn {
+  padding: 12px 12px;
+  font-size: 18px;
+}
+
+.game-info {
+  text-align: center;
+  margin-top: 48px;
+  display: none;
+}
+
+.play-again-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 48px;
+}
+
+.cycle {
+  height: 24px;
+  width: 24px;
+  padding-bottom: 3px;
+}
+
+.btn-play-again {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 12px 12px;
+  font-size: 18px;
+}

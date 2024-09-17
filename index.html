@@ -4,7 +4,44 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Rock Paper Scissors</title>
-    <script src="script.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="style.css">
   </head>
-  <body></body>
+  <body>
+    <h1 class="game-title">Rock Paper Scissors</h1>
+    <div class="main-container">
+    <div class="player-container score-container">
+      <h3 class="player-title">Player</h3>
+      <div class="player-info">
+        <span class="player-score-title score-title">Score:</span>
+        <span class="player-score score">0</span>
+      </div>
+    </div>
+    <div class="computer-container score-container">
+      <h3 class="computer-title">Computer</h3>
+      <div class="computer-info">
+        <span class="computer-score-title score-title">Score:</span>
+        <span class="computer-score score">0</span>
+      </div>
+    </div>
+  </div>
+</div>
+    <div class="buttons">
+      <button class="btn btn-rock">Rock</button>
+      <button class="btn btn-paper">Paper</button>
+      <button class="btn btn-scissors">Scissors</button>
+    </div>
+    <div class="game-info">
+      <h2 class="game-message">Rock beats paper</h2>
+    </div>
+    <div class="play-again-container">
+    <button class="btn-play-again"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="cycle">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99" />
+    </svg>
+    Play again</button>
+  </div>
+  </body>
 </html>
